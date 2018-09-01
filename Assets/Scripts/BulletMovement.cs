@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletMovement : MonoBehaviour {
 
 	public Vector3 movementDirection;
-	public float movementSpeed;
-	private Rigidbody2D bulletRigidBody;
+    public float movementSpeed;
+
+
+    private Rigidbody2D bulletRigidBody;
 
 	public float bulletLifetime;
 	private float lifetimeCounter;
 
-	
 	public string bulletTag;
 	public string enemyTag;
 	public string heroTag;
@@ -43,5 +45,9 @@ public class BulletMovement : MonoBehaviour {
 		else if(other.gameObject.tag == this.wallTag) {
 			Destroy(this.gameObject);
 		}
+        else if(other.gameObject.tag == this.heroTag) { 
+            SceneManager.LoadScene("GameOver");
+            
+        }
 	}
 }
