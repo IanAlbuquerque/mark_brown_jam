@@ -8,14 +8,9 @@ public class PlayerMovement : MonoBehaviour {
 	public Rigidbody2D heroRigidBody;
 	public float moveSpeed;
 	public float dashMultiplier;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		// Look at mouse position
 		var v3 = Input.mousePosition;
 		v3.z = 0.0f;
