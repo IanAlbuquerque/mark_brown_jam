@@ -710,19 +710,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '- Programming / UX
+  m_Text: '- Programming / Game Design
 
     - SFX / BGM
 
-    - Programming / UX
+    - Game Design / Programming
 
-    - Illustration / Animation
+    - Illustration / Game Design
 
-    - Illustration / Animation
+    - Illustration / Game Design
 
     - Animation
 
-    - Narrative / Level Design / UX'
+    - Game Design / Narrative'
 --- !u!222 &670421893
 CanvasRenderer:
   m_ObjectHideFlags: 0
