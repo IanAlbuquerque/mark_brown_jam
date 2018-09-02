@@ -33,12 +33,12 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 radiusPt = this.hero.transform.position;
 		radiusPt.x += this.parryRadius;
 		radiusPt -= this.hero.transform.position;
-        Gizmos.DrawLine(this.hero.transform.position, Quaternion.AngleAxis(this.parryAngle/2.0f, Vector3.forward) * radiusPt + this.hero.transform.position);
-		Gizmos.DrawLine(this.hero.transform.position, Quaternion.AngleAxis(this.parryAngle/2.0f, -1.0f * Vector3.forward) * radiusPt + this.hero.transform.position);
+        Gizmos.DrawLine(this.hero.transform.position, Quaternion.AngleAxis(this.parryAngle, Vector3.forward) * radiusPt + this.hero.transform.position);
+		Gizmos.DrawLine(this.hero.transform.position, Quaternion.AngleAxis(this.parryAngle, -1.0f * Vector3.forward) * radiusPt + this.hero.transform.position);
     }
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		// Look at mouse position
 		if(!this.isPlayerInputsDisabled) {
 			var v3 = Input.mousePosition;
@@ -80,13 +80,20 @@ public class PlayerMovement : MonoBehaviour {
 				Debug.Log("Parry, o Onitorrinco!");
 				GameObject[] bullets = GameObject.FindGameObjectsWithTag(this.bulletTag);
 				bool foundBulletToParry = false;
-				float minDist = 9999999.0f;
+				float minAngle = 361.0f;
 				GameObject parriedBullet = null;
 				foreach(GameObject bullet in bullets) {
 					if(this.isBulletReadyToParry(bullet)) {
-						Vector3 bulletDir = bullet.transform.position - this.hero.transform.position;
-						if(bulletDir.magnitude < minDist) {
-							minDist = bulletDir.magnitude;
+						var v3 = Input.mousePosition;
+						v3.z = 0.0f;
+						v3 = gameCamera.ScreenToWorldPoint(v3);
+						Vector2 bulletPos = new Vector2(bullet.transform.position.x - hero.transform.position.x,
+														bullet.transform.position.y - hero.transform.position.y);
+						Vector2 mousePos = new Vector2(v3.x - hero.transform.position.x,
+														v3.y - hero.transform.position.y);
+						float bulletAngle = Vector2.Angle(bulletPos, mousePos);
+						if(bulletAngle < minAngle) {
+							minAngle = bulletAngle;
 							parriedBullet = bullet;
 							foundBulletToParry = true;
 						}
@@ -145,15 +152,18 @@ public class PlayerMovement : MonoBehaviour {
 
 	private bool isBulletReadyToParry(GameObject bullet) {
 		Vector3 bulletDir = bullet.transform.position - this.hero.transform.position;
+		Vector2 bulletDir2 = new Vector2(bulletDir.x, bulletDir.y);
 		var v3 = Input.mousePosition;
 		v3.z = 0.0f;
 		v3 = gameCamera.ScreenToWorldPoint(v3);
 		Vector3 mouseDir = v3 - this.hero.transform.position;
+		Vector2 mouseDir2 = new Vector2(mouseDir.x, mouseDir.y);
 		Vector3 bulletMoveDir = bullet.GetComponent<BulletMovement>().movementDirection;
-		if(bulletDir.magnitude > this.parryRadius) return false;
-		Debug.Log(Vector3.Angle(bulletDir, mouseDir));
-		if(Vector3.Angle(bulletDir, mouseDir) > this.parryAngle) return false;
-		if(Vector3.Dot(bulletMoveDir.normalized, -1.0f*(mouseDir.normalized)) < 0.0f) return false;
+		Vector2 bulletMoveDir2 = new Vector2(bulletMoveDir.x, bulletMoveDir.y);
+		if(bulletDir2.magnitude > this.parryRadius) return false;
+		Debug.Log(Vector2.Angle(bulletDir2, mouseDir2));
+		if(Vector2.Angle(bulletDir2, mouseDir2) > this.parryAngle) return false;
+		if(Vector2.Dot(bulletMoveDir2.normalized, -1.0f*(mouseDir2.normalized)) < 0.0f) return false;
 		return true;
 	}
 }
