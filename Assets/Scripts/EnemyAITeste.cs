@@ -40,6 +40,8 @@ public class EnemyAITeste : MonoBehaviour {
 	public float directionToggleProbability;
 	private float directionToggleCount;
 
+	public float sideSpeedMultiplier;
+
 	// Use this for initialization
 	void Start () {
 		this.shootCount = 0;
@@ -64,38 +66,42 @@ public class EnemyAITeste : MonoBehaviour {
 			}
 		}
 
-        if (this.FollowEnter && !this.isInShootPreparation)
-        {
-			var deltaPlayer = this.hero.transform.position - this.transform.position;
-            Debug.Log("Pursuit");
-            Vector3 tempVect = deltaPlayer.normalized * this.moveSpeed * Time.deltaTime;
+    if (this.FollowEnter && !this.isInShootPreparation)
+    {
+			var deltaPlayer = new Vector2(this.hero.transform.position.x - this.transform.position.x,
+																		this.hero.transform.position.y - this.transform.position.y);
+      Vector3 tempVect = deltaPlayer.normalized * this.moveSpeed * Time.deltaTime;
 			float angle = Mathf.Atan2(deltaPlayer.y, deltaPlayer.x) * Mathf.Rad2Deg;
-			this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+			this.thisEnemyRigidBody.MoveRotation(angle);
 			if(!this.StopEnter) {
 				if(!this.StopEnterEnemy) {
-					tempVect = Quaternion.Euler(0.0f, 0.0f, 90.0f * (this.directionToggle?1.0f:-1.0f)) * tempVect;
-          this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
+						this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
 				} else {
 					if(this.enemyEntered != null) {
-            tempVect = this.enemyEntered.transform.position - this.transform.position;
-						tempVect = tempVect.normalized * this.moveSpeed * Time.deltaTime;
+						tempVect = this.enemyEntered.transform.position - this.transform.position;
+						tempVect = tempVect.normalized * this.moveSpeed * this.sideSpeedMultiplier * Time.deltaTime;
 						tempVect = Quaternion.Euler(0.0f, 0.0f, 90.0f * (this.directionToggle?1.0f:-1.0f)) * tempVect;
-          	this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
+						this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
 					}
 				}
+			} else {
+				tempVect = Quaternion.Euler(0.0f, 0.0f, 90.0f * (this.directionToggle?1.0f:-1.0f)) * tempVect  * this.sideSpeedMultiplier;
+				this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
 			}
-        }
+    }
 
-        if (this.FireEnter && this.shootCount > this.shootDuration)
-        {
+    if (this.FireEnter && this.shootCount > this.shootDuration)
+    {
 			this.isInShootPreparation = true;
 			this.shootPreparationCounter = 0.0f;
-        }
+    }
 
 
 		if(this.shootPreparationCounter <= this.shootPreparationDuration* 0.5f &&
 			this.shootPreparationCounter + Time.deltaTime > this.shootPreparationDuration * 0.5f) {
-			var deltaPlayer = this.hero.transform.position - this.transform.position;
+			var deltaPlayer = new Vector3(this.hero.transform.position.x - this.transform.position.x,
+																		this.hero.transform.position.y - this.transform.position.y,
+																		0.0f);
 			var bullet = Instantiate(this.bulletPrefab);
 			bullet.transform.position = this.bulletSpawnerPoint.transform.position;
 			BulletMovement bulletMovementScript = bullet.GetComponent<BulletMovement>();
