@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour {
 				this.isPlayerInputsDisabled = true;
 				this.isPlayerInvulnerable = true;
 				Color c = this.heroSprite.color;
+				this.heroAnimator.SetTrigger("Dash");
 				c.r = 0.5f;
 				c.g = 0.5f;
 				this.heroSprite.color = c;
@@ -112,7 +113,6 @@ public class PlayerMovement : MonoBehaviour {
 		if(this.isPlayerInRoll) {
 			this.rollCounter += Time.deltaTime;
 			float t = (this.rollCounter/this.rollTime);
-			this.heroAnimator.SetTrigger("Dash");
 			this.heroRigidBody.MovePosition(t * this.rollEndPos + this.rollStartPos * (1.0f - t));
 		}
 
