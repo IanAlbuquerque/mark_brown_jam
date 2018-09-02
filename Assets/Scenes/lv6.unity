@@ -4070,12 +4070,12 @@ Transform:
   - {fileID: 751181191}
   - {fileID: 61507193}
   - {fileID: 450774425}
-  - {fileID: 2129816964}
   - {fileID: 629461134}
   - {fileID: 1886079626}
-  - {fileID: 1955394531}
+  - {fileID: 2129816964}
   - {fileID: 590640601}
   - {fileID: 1073459097}
+  - {fileID: 1955394531}
   - {fileID: 586154902}
   - {fileID: 1148945413}
   - {fileID: 686196402}
@@ -18167,6 +18167,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1009628422
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047649372001834, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fcdfd53594223455aac945d285d702b0, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1009891246
 GameObject:
   m_ObjectHideFlags: 0
