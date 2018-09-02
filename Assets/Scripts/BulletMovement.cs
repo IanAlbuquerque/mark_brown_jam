@@ -49,7 +49,8 @@ public class BulletMovement : MonoBehaviour {
 		else if(other.gameObject.tag == this.heroTag) { 
 			GameObject[] scripts = GameObject.FindGameObjectsWithTag(this.scriptsTag);
 			if(!scripts[0].GetComponent<PlayerMovement>().isPlayerInvulnerable) {
-				SceneManager.LoadScene("GameOver");
+				Scene scene = SceneManager.GetActiveScene();
+				SceneManager.LoadScene(scene.name);
 			}
 		}
 	}
