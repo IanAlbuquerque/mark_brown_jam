@@ -243,7 +243,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.49
+  m_Radius: 4.8
 --- !u!58 &58770539537947250
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -258,7 +258,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.42
+  m_Radius: 5.7
 --- !u!58 &58898228758044020
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -301,11 +301,17 @@ MonoBehaviour:
   FollowEnter: 0
   FireEnter: 1
   StopEnter: 0
+  StopEnterEnemy: 0
+  enemyEntered: {fileID: 0}
   moveSpeed: 0.6
   bulletSpawnerPoint: {fileID: 1331926371138176}
   shootDuration: 1.5
   bulletPrefab: {fileID: 1577977402263408, guid: 16def8a93b7b3c945b5c67fc3e6c815c,
     type: 2}
+  shootPreparationDuration: 0.15
+  minDirectionToggleTime: 1
+  maxDirectionToggleTime: 3
+  directionToggleProbability: 0.7
 --- !u!114 &114666255190712114
 MonoBehaviour:
   m_ObjectHideFlags: 1
