@@ -20,6 +20,8 @@ public class BulletMovement : MonoBehaviour {
 	public string wallTag;
 	public string scriptsTag;
 
+	public GameObject explosionPrefab;
+
 	// Use this for initialization
 	void Start () {
 		this.bulletRigidBody = this.GetComponent<Rigidbody2D>();
@@ -40,6 +42,8 @@ public class BulletMovement : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == this.enemyTag) {
+			var explosion = Instantiate(this.explosionPrefab);
+			explosion.transform.position = other.gameObject.transform.position;
 			Destroy(other.gameObject);
 			Destroy(this.gameObject);
 		}
