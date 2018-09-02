@@ -30479,7 +30479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hero: {fileID: 1114511013}
   heroRigidBody: {fileID: 1114511015}
-  moveSpeed: 7
+  moveSpeed: 10
   rollSpeed: 10
   bulletTag: bullet
   gameCamera: {fileID: 475923890}

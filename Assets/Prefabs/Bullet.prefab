@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDirection: {x: 0, y: 0, z: 0}
-  movementSpeed: 10
+  movementSpeed: 40
   bulletLifetime: 10
   bulletTag: bullet
   enemyTag: enemy

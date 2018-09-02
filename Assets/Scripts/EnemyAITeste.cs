@@ -74,13 +74,13 @@ public class EnemyAITeste : MonoBehaviour {
 			if(!this.StopEnter) {
 				if(!this.StopEnterEnemy) {
 					tempVect = Quaternion.Euler(0.0f, 0.0f, 90.0f * (this.directionToggle?1.0f:-1.0f)) * tempVect;
-            		this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
+          this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
 				} else {
 					if(this.enemyEntered != null) {
-            			tempVect = this.enemyEntered.transform.position - this.transform.position;
+            tempVect = this.enemyEntered.transform.position - this.transform.position;
 						tempVect = tempVect.normalized * this.moveSpeed * Time.deltaTime;
 						tempVect = Quaternion.Euler(0.0f, 0.0f, 90.0f * (this.directionToggle?1.0f:-1.0f)) * tempVect;
-            			this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
+          	this.thisEnemyRigidBody.MovePosition(this.transform.position + tempVect);
 					}
 				}
 			}
@@ -92,18 +92,23 @@ public class EnemyAITeste : MonoBehaviour {
 			this.shootPreparationCounter = 0.0f;
         }
 
-		if(this.isInShootPreparation) {
-			this.shootPreparationCounter += Time.deltaTime;
-		}
 
-		if(this.shootPreparationCounter > this.shootPreparationDuration) {
-			this.isInShootPreparation = false;
-			this.shootPreparationCounter = 0.0f;
+		if(this.shootPreparationCounter <= this.shootPreparationDuration* 0.5f &&
+			this.shootPreparationCounter + Time.deltaTime > this.shootPreparationDuration * 0.5f) {
 			var deltaPlayer = this.hero.transform.position - this.transform.position;
 			var bullet = Instantiate(this.bulletPrefab);
 			bullet.transform.position = this.bulletSpawnerPoint.transform.position;
 			BulletMovement bulletMovementScript = bullet.GetComponent<BulletMovement>();
 			bulletMovementScript.movementDirection = deltaPlayer;
+		}
+
+		if(this.shootPreparationCounter > this.shootPreparationDuration) {
+			this.isInShootPreparation = false;
+			this.shootPreparationCounter = 0.0f;
+		}
+
+		if(this.isInShootPreparation) {
+			this.shootPreparationCounter += Time.deltaTime;
 		}
 
 		if(this.shootCount > this.shootDuration) {
