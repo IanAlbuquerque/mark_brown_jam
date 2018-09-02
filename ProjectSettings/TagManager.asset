@@ -9,9 +9,7 @@ TagManager:
   - hero
   - wall
   - GameOver
-  - RangeFire
-  - RangeFollow
-  - RangeStop
+  - scripts
   layers:
   - Default
   - TransparentFX
