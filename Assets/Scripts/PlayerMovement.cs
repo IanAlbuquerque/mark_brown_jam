@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	private Vector3 rollStartPos;
 	private Vector3 rollEndPos;
+
+	public Animator heroAnimator;
 	
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
@@ -94,13 +96,21 @@ public class PlayerMovement : MonoBehaviour {
 			float h = Input.GetAxisRaw("Horizontal");
 			float v = Input.GetAxisRaw("Vertical");
 			Vector3 tempVect = new Vector3(h, v, 0);
+			if(tempVect.magnitude < Mathf.Epsilon) {
+				this.heroAnimator.SetBool("IsWalking", false);
+			} else {
+				this.heroAnimator.SetBool("IsWalking", true);
+			}
 			tempVect = tempVect.normalized * this.moveSpeed * Time.deltaTime;
 			this.heroRigidBody.MovePosition(this.heroRigidBody.transform.position + tempVect);
+		} else {
+			this.heroAnimator.SetBool("IsWalking", false);			
 		}
 
 		if(this.isPlayerInRoll) {
 			this.rollCounter += Time.deltaTime;
 			float t = (this.rollCounter/this.rollTime);
+			this.heroAnimator.SetTrigger("Dash");
 			this.heroRigidBody.MovePosition(t * this.rollEndPos + this.rollStartPos * (1.0f - t));
 		}
 
@@ -156,6 +166,7 @@ public class PlayerMovement : MonoBehaviour {
 					Color c = this.heroSprite.color;
 					c.a = 0.5f;
 					this.heroSprite.color = c;
+					this.heroAnimator.SetTrigger("Parry");
 				} else {
 					// PARRY FAIL
 					Debug.Log("Parry fail!");
@@ -167,6 +178,7 @@ public class PlayerMovement : MonoBehaviour {
 					c.b = 0.5f;
 					c.g = 0.5f;
 					this.heroSprite.color = c;
+					this.heroAnimator.SetTrigger("Parry");
 				}
 
 			}

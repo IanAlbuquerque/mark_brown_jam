@@ -192,7 +192,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1990898961544582}
-  m_LocalRotation: {x: -0, y: -0, z: 0.1429852, w: 0.9897249}
+  m_LocalRotation: {x: 0, y: 0, z: -0.4917398, w: 0.8707422}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.08, y: 0.08, z: 1}
   m_Children:
@@ -201,7 +201,7 @@ Transform:
   - {fileID: 4792272627260670}
   m_Father: {fileID: 4235974871172402}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.441}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -58.91}
 --- !u!4 &4193982623321606
 Transform:
   m_ObjectHideFlags: 1
@@ -364,7 +364,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.21
+  m_Radius: 0.25
 --- !u!95 &95223872443705086
 Animator:
   serializedVersion: 3
@@ -406,15 +406,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTag: enemy
+  heroTag: hero
   FollowEnter: 0
-  FireEnter: 1
+  FireEnter: 0
   StopEnter: 0
-  hero: {fileID: 0}
+  StopEnterEnemy: 0
+  enemyEntered: {fileID: 0}
   moveSpeed: 0.6
-  bulletSpawnRadius: 0
+  bulletSpawnerPoint: {fileID: 1331926371138176}
   shootDuration: 1.5
   bulletPrefab: {fileID: 1577977402263408, guid: 16def8a93b7b3c945b5c67fc3e6c815c,
     type: 2}
+  shootPreparationDuration: 0.5
+  minDirectionToggleTime: 1
+  maxDirectionToggleTime: 3
+  directionToggleProbability: 0.7
 --- !u!114 &114666255190712114
 MonoBehaviour:
   m_ObjectHideFlags: 1
