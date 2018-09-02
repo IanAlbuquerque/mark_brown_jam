@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadNextLevel : MonoBehaviour {
 
-    void OnTriggerEnter2d(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
+       if(other.gameObject.tag == "hero")
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             Debug.Log("Tocou");
-       /* if(other.gameObject.tag == "hero")
-        {
-        }*/
+        }
     }
 }
