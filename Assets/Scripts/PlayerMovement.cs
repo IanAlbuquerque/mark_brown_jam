@@ -34,7 +34,14 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 rollEndPos;
 
 	public Animator heroAnimator;
+	public Animator cameraAnimator;
+
+	public float parryTimeDilation;
 	
+	public void Start() {
+		Time.timeScale = 1.0f;
+	}
+
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.hero.transform.position, this.parryRadius);
@@ -160,7 +167,7 @@ public class PlayerMovement : MonoBehaviour {
 					Debug.Log("Parry success!");
 					BulletMovement bulletMovScript = parriedBullet.GetComponent<BulletMovement>();
 					bulletMovScript.movementDirection *= -1.0f;
-					bulletMovScript.movementSpeed *= 1.2f;
+					bulletMovScript.movementSpeed *= 1.0f/this.parryTimeDilation;
 					isPlayerInParrySuccess = true;
 					this.isPlayerInvulnerable = true;
 					this.isPlayerInputsDisabled = true;
@@ -169,6 +176,8 @@ public class PlayerMovement : MonoBehaviour {
 					c.a = 0.5f;
 					this.heroSprite.color = c;
 					this.heroAnimator.SetTrigger("Parry");
+					this.cameraAnimator.SetTrigger("CameraZoomy");
+					Time.timeScale = this.parryTimeDilation;
 				} else {
 					// PARRY FAIL
 					Debug.Log("Parry fail!");
@@ -181,16 +190,21 @@ public class PlayerMovement : MonoBehaviour {
 					c.g = 0.5f;
 					this.heroSprite.color = c;
 					this.heroAnimator.SetTrigger("Parry");
+					this.cameraAnimator.SetTrigger("CameraOuty");
+					// this.cameraAnimator.SetTrigger("CameraZoomy");
 				}
 
 			}
 		}
 
-		if(this.isPlayerInParrySuccess) {	
-			this.parrySuccessIvencibilityCounter += Time.deltaTime;
-		}
+
 		if(this.isPlayerInParryFail) {	
 			this.parryFailIvencibilityCounter += Time.deltaTime;
+		}
+		
+		if(this.parrySuccessIvencibilityCounter + Time.deltaTime > this.parrySuccessInvencibilityTime * 0.5f &&
+			this.parrySuccessIvencibilityCounter <= this.parrySuccessInvencibilityTime) {
+			Time.timeScale = 1.0f;
 		}
 		if(this.parrySuccessIvencibilityCounter > this.parrySuccessInvencibilityTime) {
 			this.isPlayerInParrySuccess = false;
@@ -198,6 +212,18 @@ public class PlayerMovement : MonoBehaviour {
 			this.isPlayerInputsDisabled = false;
 			this.parrySuccessIvencibilityCounter = 0.0f;
 			this.heroSprite.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		}
+		if(this.isPlayerInParrySuccess) {	
+			this.parrySuccessIvencibilityCounter += Time.deltaTime;
+		}
+
+		if(this.parrySuccessIvencibilityCounter > this.parrySuccessInvencibilityTime) {
+			this.isPlayerInParrySuccess = false;
+			this.isPlayerInvulnerable = false;
+			this.isPlayerInputsDisabled = false;
+			this.parrySuccessIvencibilityCounter = 0.0f;
+			this.heroSprite.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			Time.timeScale = 1.0f;
 		}
 		if(this.parryFailIvencibilityCounter > this.parryFailInvencibilityTime) {
 			this.isPlayerInParryFail = false;
