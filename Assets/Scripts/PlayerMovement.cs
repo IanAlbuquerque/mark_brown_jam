@@ -190,6 +190,7 @@ public class PlayerMovement : MonoBehaviour {
 					c.g = 0.5f;
 					this.heroSprite.color = c;
 					this.heroAnimator.SetTrigger("Parry");
+					this.cameraAnimator.SetTrigger("CameraOuty");
 					// this.cameraAnimator.SetTrigger("CameraZoomy");
 				}
 
