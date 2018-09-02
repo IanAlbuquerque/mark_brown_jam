@@ -14,13 +14,11 @@ public class PlayerMovement : MonoBehaviour {
 	void FixedUpdate () {
 		// Look at mouse position
 		var v3 = Input.mousePosition;
-        Debug.Log(v3.x.ToString() + "/" + v3.y.ToString());
 		v3.z = 0.0f;
 		v3 = gameCamera.ScreenToWorldPoint(v3);
 		v3 -= this.hero.transform.position;
 
 		float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
-        //Debug.Log(angle);
 		this.hero.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 		//Dash
