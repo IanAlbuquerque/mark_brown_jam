@@ -10,6 +10,8 @@ TagManager:
   - wall
   - GameOver
   - scripts
+  - RangeFollow
+  - RangeFire
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - walls
   - 
   - 
   - 

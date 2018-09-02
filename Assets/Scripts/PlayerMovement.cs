@@ -53,11 +53,13 @@ public class PlayerMovement : MonoBehaviour {
 			var v3 = Input.mousePosition;
 			v3.z = 0.0f;
 			v3 = gameCamera.ScreenToWorldPoint(v3);
-			v3 -= this.hero.transform.position;
+			var v2 = new Vector2(v3.x - this.hero.transform.position.x,
+														v3.y - this.hero.transform.position.y);
 
-			float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
+			float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
 			//Debug.Log(angle);
 			this.hero.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+			// this.hero.GetComponent<Rigidbody2D>().MoveRotation(angle);
 		}
 
 		//Dash
