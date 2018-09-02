@@ -317,8 +317,8 @@ Transform:
   m_LocalPosition: {x: -1.2519808, y: 1.4045088, z: 0.11999191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 498869617}
   - {fileID: 1164257308}
+  - {fileID: 498869617}
   - {fileID: 1546798483}
   - {fileID: 1834411885}
   - {fileID: 1232989432}
@@ -1072,6 +1072,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1692061894639438, guid: c8d5e658ae6a2434cb3e4e196a8dab78,
     type: 2}
   m_PrefabInternal: {fileID: 1250041301}
+--- !u!95 &1114511014 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95623764271471922, guid: c8d5e658ae6a2434cb3e4e196a8dab78,
+    type: 2}
+  m_PrefabInternal: {fileID: 1250041301}
 --- !u!50 &1114511015 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 50051226337000460, guid: c8d5e658ae6a2434cb3e4e196a8dab78,
@@ -1098,7 +1103,7 @@ Transform:
   - {fileID: 1726646735}
   - {fileID: 368875980}
   m_Father: {fileID: 269453161}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1232989431
 Prefab:
@@ -1778,6 +1783,7 @@ MonoBehaviour:
   isPlayerInputsDisabled: 0
   heroSprite: {fileID: 457807349}
   rollTime: 0
+  heroAnimator: {fileID: 1114511014}
 --- !u!4 &1876608533
 Transform:
   m_ObjectHideFlags: 0
