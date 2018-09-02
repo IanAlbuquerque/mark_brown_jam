@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class StartMenuScripts : MonoBehaviour {
 
 	public Button newGameButton;
+	public Button endlessGameButton;
 	public Button creditsButton;
 	public Button quitButton;
 	public Button backCreditsButton;
@@ -14,10 +15,12 @@ public class StartMenuScripts : MonoBehaviour {
 	public GameObject creditsPanel;
 
 	public string firstSceneName;
+	public string endlessSceneName;
 
 	// Use this for initialization
 	void Start () {
 		this.newGameButton.onClick.AddListener(this.onClickNewGame);
+		this.endlessGameButton.onClick.AddListener(this.onClickEndless);
 		this.creditsButton.onClick.AddListener(this.onClickCredits);
 		this.quitButton.onClick.AddListener(this.onClickQuit);
 		this.backCreditsButton.onClick.AddListener(this.onClickCreditsBack);
@@ -25,6 +28,10 @@ public class StartMenuScripts : MonoBehaviour {
 
 	public void onClickNewGame() {
 		SceneManager.LoadScene(this.firstSceneName);
+	}
+
+	public void onClickEndless() {
+		SceneManager.LoadScene(this.endlessSceneName);
 	}
 
 	public void onClickCredits() {
