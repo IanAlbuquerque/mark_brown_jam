@@ -20,14 +20,22 @@ public class BulletMovement : MonoBehaviour {
 	public string wallTag;
 	public string scriptsTag;
 
+	public GameObject explosionPrefab;
+
 	// Use this for initialization
 	void Start () {
 		this.bulletRigidBody = this.GetComponent<Rigidbody2D>();
 		this.lifetimeCounter = 0.0f;
+
+		float angle = Mathf.Atan2(movementDirection.y, movementDirection.x) * Mathf.Rad2Deg;
+		this.bulletRigidBody.MoveRotation(angle);// = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		float angle = Mathf.Atan2(movementDirection.y, movementDirection.x) * Mathf.Rad2Deg;
+		this.bulletRigidBody.MoveRotation(angle);// = Quaternion.AngleAxis(angle, Vector3.forward);
+
 		this.lifetimeCounter += Time.deltaTime;
 
     Vector3 tempVect = movementDirection.normalized * this.movementSpeed * Time.deltaTime;
@@ -40,6 +48,8 @@ public class BulletMovement : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == this.enemyTag) {
+			var explosion = Instantiate(this.explosionPrefab);
+			explosion.transform.position = other.gameObject.transform.position;
 			Destroy(other.gameObject);
 			Destroy(this.gameObject);
 		}

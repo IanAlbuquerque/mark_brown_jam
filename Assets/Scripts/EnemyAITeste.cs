@@ -40,6 +40,7 @@ public class EnemyAITeste : MonoBehaviour {
 	public float directionToggleProbability;
 	private float directionToggleCount;
 
+
 	public float sideSpeedMultiplier;
 
 	// Use this for initialization
