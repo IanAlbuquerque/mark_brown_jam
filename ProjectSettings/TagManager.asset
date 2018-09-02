@@ -12,6 +12,7 @@ TagManager:
   - scripts
   - RangeFollow
   - RangeFire
+  - endsc
   layers:
   - Default
   - TransparentFX

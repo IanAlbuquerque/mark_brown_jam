@@ -50,8 +50,15 @@ public class BulletMovement : MonoBehaviour {
 		if(other.gameObject.tag == this.enemyTag) {
 			var explosion = Instantiate(this.explosionPrefab);
 			explosion.transform.position = other.gameObject.transform.position;
+
+			GameObject[] tmp = GameObject.FindGameObjectsWithTag("endsc");
+			if(tmp.Length > 0) {
+				tmp[0].GetComponent<EndlessScore>().totalKilled += 1;
+			}
+
 			Destroy(other.gameObject);
 			Destroy(this.gameObject);
+			
 		}
 		else if(other.gameObject.tag == this.wallTag) {
 			Destroy(this.gameObject);
