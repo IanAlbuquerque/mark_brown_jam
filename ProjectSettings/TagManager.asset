@@ -9,6 +9,7 @@ TagManager:
   - hero
   - wall
   - GameOver
+  - scripts
   layers:
   - Default
   - TransparentFX

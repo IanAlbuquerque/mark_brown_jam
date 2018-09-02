@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class BulletMovement : MonoBehaviour {
 
 	public Vector3 movementDirection;
-    public float movementSpeed;
+  public float movementSpeed;
 
 
-    private Rigidbody2D bulletRigidBody;
+  private Rigidbody2D bulletRigidBody;
 
 	public float bulletLifetime;
 	private float lifetimeCounter;
@@ -18,6 +18,7 @@ public class BulletMovement : MonoBehaviour {
 	public string enemyTag;
 	public string heroTag;
 	public string wallTag;
+	public string scriptsTag;
 
 	// Use this for initialization
 	void Start () {
@@ -45,9 +46,11 @@ public class BulletMovement : MonoBehaviour {
 		else if(other.gameObject.tag == this.wallTag) {
 			Destroy(this.gameObject);
 		}
-        else if(other.gameObject.tag == this.heroTag) { 
-            SceneManager.LoadScene("GameOver");
-            
-        }
+		else if(other.gameObject.tag == this.heroTag) { 
+			GameObject[] scripts = GameObject.FindGameObjectsWithTag(this.scriptsTag);
+			if(!scripts[0].GetComponent<PlayerMovement>().isPlayerInvulnerable) {
+				SceneManager.LoadScene("GameOver");
+			}
+		}
 	}
 }

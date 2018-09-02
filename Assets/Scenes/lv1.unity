@@ -277,6 +277,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 884d7b371808e71428b8a9715cdbbf67, type: 2}
   m_IsPrefabAsset: 0
+--- !u!212 &457807349 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212987276819990228, guid: c8d5e658ae6a2434cb3e4e196a8dab78,
+    type: 2}
+  m_PrefabInternal: {fileID: 1250041301}
 --- !u!1 &475923888
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +331,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.64
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1236,7 +1241,7 @@ GameObject:
   - component: {fileID: 1876608532}
   m_Layer: 0
   m_Name: Scripts
-  m_TagString: Untagged
+  m_TagString: scripts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1254,9 +1259,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hero: {fileID: 1114511013}
   heroRigidBody: {fileID: 1114511015}
-  moveSpeed: 10
+  moveSpeed: 7
   dashMultiplier: 5
+  bulletTag: bullet
   gameCamera: {fileID: 475923890}
+  parryRadius: 0.8
+  parryAngle: 89.4
+  parrySuccessInvencibilityTime: 0.3
+  parryFailInvencibilityTime: 0.5
+  isPlayerInvulnerable: 0
+  isPlayerInputsDisabled: 0
+  heroSprite: {fileID: 457807349}
 --- !u!4 &1876608533
 Transform:
   m_ObjectHideFlags: 0

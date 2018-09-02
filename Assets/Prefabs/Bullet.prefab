@@ -129,12 +129,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDirection: {x: 0, y: 0, z: 0}
-  movementSpeed: 7
+  movementSpeed: 10
   bulletLifetime: 10
   bulletTag: bullet
   enemyTag: enemy
   heroTag: hero
   wallTag: wall
+  scriptsTag: scripts
 --- !u!212 &212850437004245054
 SpriteRenderer:
   m_ObjectHideFlags: 1
