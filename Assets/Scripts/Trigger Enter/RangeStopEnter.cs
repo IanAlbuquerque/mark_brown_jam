@@ -10,13 +10,25 @@ public class RangeStopEnter : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("hero") || collision.gameObject.CompareTag("enemy"))
+        if (collision.gameObject.CompareTag("hero"))
         {
             transform.parent.gameObject.GetComponent<EnemyAITeste>().StopEnter = true;
+        }
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            transform.parent.gameObject.GetComponent<EnemyAITeste>().StopEnterEnemy = true;
+            transform.parent.gameObject.GetComponent<EnemyAITeste>().enemyEntered = collision.gameObject;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        transform.parent.gameObject.GetComponent<EnemyAITeste>().StopEnter = false;
+        if (collision.gameObject.CompareTag("hero"))
+        {
+            transform.parent.gameObject.GetComponent<EnemyAITeste>().StopEnter = false;
+        }
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            transform.parent.gameObject.GetComponent<EnemyAITeste>().StopEnterEnemy = false;
+        }
     }
 }
