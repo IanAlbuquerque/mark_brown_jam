@@ -1264,7 +1264,7 @@ MonoBehaviour:
   bulletTag: bullet
   gameCamera: {fileID: 475923890}
   parryRadius: 0.6
-  parryAngle: 45
+  parryAngle: 50
   parrySuccessInvencibilityTime: 0.3
   parryFailInvencibilityTime: 0.5
   isPlayerInvulnerable: 0
