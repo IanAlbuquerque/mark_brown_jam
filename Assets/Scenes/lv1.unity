@@ -687,7 +687,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.05, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.15
 --- !u!50 &1114511015 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 50051226337000460, guid: c8d5e658ae6a2434cb3e4e196a8dab78,
@@ -1260,7 +1260,7 @@ MonoBehaviour:
   hero: {fileID: 1114511013}
   heroRigidBody: {fileID: 1114511015}
   moveSpeed: 7
-  dashMultiplier: 5
+  rollSpeed: 10
   bulletTag: bullet
   gameCamera: {fileID: 475923890}
   parryRadius: 0.6
@@ -1270,6 +1270,7 @@ MonoBehaviour:
   isPlayerInvulnerable: 0
   isPlayerInputsDisabled: 0
   heroSprite: {fileID: 457807349}
+  rollTime: 0.3
 --- !u!4 &1876608533
 Transform:
   m_ObjectHideFlags: 0

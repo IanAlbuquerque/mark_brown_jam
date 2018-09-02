@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject hero;
 	public Rigidbody2D heroRigidBody;
 	public float moveSpeed;
-	public float dashMultiplier;
+	public float rollSpeed;
 	public string bulletTag;
   public Camera gameCamera;
 
@@ -25,6 +25,13 @@ public class PlayerMovement : MonoBehaviour {
 
 	public bool isPlayerInputsDisabled;
 	public SpriteRenderer heroSprite;
+
+	private bool isPlayerInRoll;
+	public float rollTime;
+	private float rollCounter;
+
+	private Vector3 rollStartPos;
+	private Vector3 rollEndPos;
 	
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
@@ -53,19 +60,56 @@ public class PlayerMovement : MonoBehaviour {
 
 		//Dash
 		if(!this.isPlayerInputsDisabled) {
-			bool hasDashed = false;
+			
+			float h = Input.GetAxisRaw("Horizontal");
+			float v = Input.GetAxisRaw("Vertical");
+
 			if(Input.GetKeyDown("space"))
 			{
-				hasDashed = true;
+				this.rollCounter = 0.0f;
+				this.isPlayerInRoll = true;
+				this.isPlayerInputsDisabled = true;
+				this.isPlayerInvulnerable = true;
+				Color c = this.heroSprite.color;
+				c.r = 0.5f;
+				c.g = 0.5f;
+				this.heroSprite.color = c;
+				this.rollStartPos = this.hero.transform.position;
+				Vector3 tempVect = new Vector3(h, v, 0);
+				if(tempVect.magnitude < Mathf.Epsilon) {
+					var v3 = Input.mousePosition;
+					v3.z = 0.0f;
+					v3 = gameCamera.ScreenToWorldPoint(v3);
+					v3.z = this.hero.transform.position.z;
+					v3 -= this.hero.transform.position;
+					tempVect = v3.normalized;
+				}
+				this.rollEndPos = tempVect.normalized * this.rollSpeed * this.rollTime;
+				this.rollEndPos += this.hero.transform.position;
 			}
+		}
 
-			// Move with wasd
+		// Move with wasd
+		if(!this.isPlayerInputsDisabled) {
 			float h = Input.GetAxisRaw("Horizontal");
 			float v = Input.GetAxisRaw("Vertical");
 			Vector3 tempVect = new Vector3(h, v, 0);
 			tempVect = tempVect.normalized * this.moveSpeed * Time.deltaTime;
-			tempVect *= hasDashed?this.dashMultiplier:1.0f;
 			this.heroRigidBody.MovePosition(this.heroRigidBody.transform.position + tempVect);
+		}
+
+		if(this.isPlayerInRoll) {
+			this.rollCounter += Time.deltaTime;
+			float t = (this.rollCounter/this.rollTime);
+			this.heroRigidBody.MovePosition(t * this.rollEndPos + this.rollStartPos * (1.0f - t));
+		}
+
+		if(this.rollCounter > this.rollTime) {
+			this.isPlayerInRoll = false;
+			this.isPlayerInputsDisabled = false;
+			this.isPlayerInvulnerable = false;
+			this.rollCounter = 0.0f;
+			this.heroSprite.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 		}
 
 		// Parry, o Onitorrinco
