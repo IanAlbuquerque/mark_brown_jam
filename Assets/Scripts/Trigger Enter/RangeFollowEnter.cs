@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class RangeFollowEnter : MonoBehaviour {
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start() {
+        transform.parent.gameObject.GetComponent<EnemyAITeste>().FollowEnter = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("hero"))
         {
@@ -13,6 +17,6 @@ public class RangeFollowEnter : MonoBehaviour {
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        transform.parent.gameObject.GetComponent<EnemyAITeste>().FireEnter = false;
+        transform.parent.gameObject.GetComponent<EnemyAITeste>().FollowEnter = false;
     }
 }

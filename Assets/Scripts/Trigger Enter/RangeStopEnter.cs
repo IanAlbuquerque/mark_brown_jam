@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class RangeStopEnter : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start() {
+        transform.parent.gameObject.GetComponent<EnemyAITeste>().StopEnter = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("RangeStop"))
+        if (collision.gameObject.CompareTag("hero") || collision.gameObject.CompareTag("enemy"))
         {
             transform.parent.gameObject.GetComponent<EnemyAITeste>().StopEnter = true;
         }
